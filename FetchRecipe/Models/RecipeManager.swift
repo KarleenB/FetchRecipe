@@ -12,11 +12,11 @@ struct RecipeManager {
     let baseURL = "https://www.themealdb.com/api/json/v1/1/"
     let categoryURL = "categories.php"
     
-//    //need to make sefood dynamic!!!!
-//    let mealsURL = "filter.php?c=Seafood"
-//
-//    //need to make id# dynamic!!!!!
-//    let recipeURL = "lookup.php?i=52772"
+    //    //need to make sefood dynamic!!!!
+    //    let mealsURL = "filter.php?c=Seafood"
+    //
+    //    //need to make id# dynamic!!!!!
+    //    let recipeURL = "lookup.php?i=52772"
     
     
     func fetchCategory() {
@@ -25,41 +25,41 @@ struct RecipeManager {
         
     }
     
-//    func fetchMeals() {
-//        let urlString = "\(baseURL)\(mealsURL)"
-//        performRequest(urlString: urlString)
-//    }
-//
-//    func fetchRecipe() {
-//        let urlString = "\(baseURL)\(recipeURL)"
-//        performRequest(urlString: urlString)
-//    }
+    //    func fetchMeals() {
+    //        let urlString = "\(baseURL)\(mealsURL)"
+    //        performRequest(urlString: urlString)
+    //    }
+    //
+    //    func fetchRecipe() {
+    //        let urlString = "\(baseURL)\(recipeURL)"
+    //        performRequest(urlString: urlString)
+    //    }
     
     func performRequest(urlString: String) {
-        //Create URL
+        
         if let url = URL(string: urlString) {
-            
-            //Create URL Session
             let session = URLSession(configuration: .default)
-            
-            //Give session a task
-            let task = session.dataTask(with: url, completionHandler: handle(data: response: error: ))
-            
-            //Start task
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                if let safeData = data {
+                    self.parseJSON(recipeData: safeData)
+                }
+            }
             task.resume()
-            
         }
     }
     
-    func handle(data: Data?, response: URLResponse?, error: Error?) {
-        if error != nil {
-            print(error!)
-            return
-        }
-        
-        if let safeData = data {
-            let dataString = String(data: safeData, encoding: .utf8)
-            print(dataString)
+    func parseJSON(recipeData: Data) {
+        let decoder = JSONDecoder()
+        do {
+            let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
+            print(decodedData.categories[0].strCategory)
+        } catch {
+            print(error)
         }
     }
+    
 }
