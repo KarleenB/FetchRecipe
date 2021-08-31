@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeManager {
+struct NetworkManager {
     
     let baseURL = "https://www.themealdb.com/api/json/v1/1/"
     let categoryURL = "categories.php"
@@ -55,7 +55,7 @@ struct RecipeManager {
     func parseJSON(recipeData: Data) {
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(RecipeData.self, from: recipeData)
+            let decodedData = try decoder.decode(CategoryData.self, from: recipeData)
             print(decodedData.categories[0].strCategory)
         } catch {
             print(error)
