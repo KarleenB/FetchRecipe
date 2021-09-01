@@ -7,17 +7,26 @@
 
 import Foundation
 
-protocol NetworkManagerDelegate {
-    //func didUpdateList()
-    func didFetchRecipeInfo(with: RecipeData)
-    func didFetchCategoryList(with: CategoryData)
-    func didFetchMealsList(with: MealData)
+protocol RecipeInfoFetchDelegate: AnyObject {
+    func didFetchRecipeInfo(with recipe: Recipe)
+    func didFailWithError(_ error: Error)
+}
+
+protocol CategoryListFetchDelegate: AnyObject  {
+    func didFetchCategoryList(with categoryData: CategoryData)
+    func didFailWithError(_ error: Error)
+}
+
+protocol MealListFetchDelegate: AnyObject  {
+    func didFetchMealsList(with mealData: MealData)
     func didFailWithError(_ error: Error)
 }
 
 struct NetworkManager {
     
-    var delegate: NetworkManagerDelegate?
+    weak var categoryListFetchDelegate: CategoryListFetchDelegate?
+    weak var mealListFetchDelegate: MealListFetchDelegate?
+    weak var recipeInfoFetchDelegate: RecipeInfoFetchDelegate?
     
     let baseURL = "https://www.themealdb.com/api/json/v1/1/"
     
@@ -36,12 +45,11 @@ struct NetworkManager {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if let error = error {
-                    self.delegate?.didFailWithError(error)
+                    self.categoryListFetchDelegate?.didFailWithError(error)
                 }
                 if let safeData = data {
                    if let categoryFood = self.decodeCategoryList(categoryData: safeData) {
-                        self.delegate?.didFetchCategoryList(with: categoryFood)
-                        print(categoryFood)
+                        self.categoryListFetchDelegate?.didFetchCategoryList(with: categoryFood)
                     }
                 }
             }
@@ -71,12 +79,11 @@ struct NetworkManager {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if let error = error {
-                    self.delegate?.didFailWithError(error)
+                    self.mealListFetchDelegate?.didFailWithError(error)
                 }
                 if let safeData = data {
                    if let meal = self.decodeMealsList(mealData: safeData) {
-                        self.delegate?.didFetchMealsList(with: meal)
-                        print(meal)
+                        self.mealListFetchDelegate?.didFetchMealsList(with: meal)
                     }
                 }
             }
@@ -99,18 +106,20 @@ struct NetworkManager {
         return "\(baseURL)lookup.php?i=\(mealID)"
     }
     
-    func fetchRecipeInfo(mealName: String) {
-        let urlString = getRecipeURL(mealID: mealName)
+    func fetchRecipeInfo(mealID: String) {
+        let urlString = getRecipeURL(mealID: mealID)
         
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if let error = error {
-                    self.delegate?.didFailWithError(error)
+                    self.recipeInfoFetchDelegate?.didFailWithError(error)
                 }
                 if let safeData = data {
-                   if let recipe = self.decodeRecipeInfo(recipeData: safeData) {
-                        self.delegate?.didFetchRecipeInfo(with: recipe)
+                   if let recipes = self.decodeRecipeInfo(recipeData: safeData),
+                      let recipe = recipes.meals.first {
+                        self.recipeInfoFetchDelegate?.didFetchRecipeInfo(with: recipe)
+                        print(recipe)
                     }
                 }
             }
