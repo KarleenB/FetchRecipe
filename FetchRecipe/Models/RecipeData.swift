@@ -7,6 +7,14 @@
 
 import Foundation
 
+//name, instruct , ingred, measure
+
 struct RecipeData: Decodable {
+    let meals: [Recipe]
+}
+
+struct Recipe: Decodable {
+    let strMeal: String
+    let strInstructions: String
     
 }

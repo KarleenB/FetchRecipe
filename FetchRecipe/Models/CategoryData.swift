@@ -8,10 +8,10 @@
 import Foundation
 
 struct CategoryData: Decodable {
-    let categories: [Categories]
+    let categories: [Category]
 }
 
-struct Categories: Decodable {
+struct Category: Decodable {
     let strCategory: String
 }
  

@@ -8,10 +8,10 @@
 import Foundation
 
 struct MealData: Decodable {
-    let meals: [Meals]
+    let meals: [Meal]
 }
 
-struct Meals: Decodable {
+struct Meal: Decodable {
     let strMeal: String
     let idMeal: String
 }
