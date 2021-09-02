@@ -9,9 +9,9 @@ import UIKit
 
 class RecipeViewController: UIViewController, RecipeInfoFetchDelegate {
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var ingredientsLabel: UILabel!
-    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var ingredientsLabel: UILabel!
+    @IBOutlet var instructionLabel: UILabel!
     
     var meal: Meal!
     var networkManager = NetworkManager()
@@ -27,6 +27,7 @@ class RecipeViewController: UIViewController, RecipeInfoFetchDelegate {
         initializeInfoLabels()
         networkManager.fetchRecipeInfo(mealID: meal.idMeal)
         
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     //MARK: - Recipe Delegate
