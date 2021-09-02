@@ -56,7 +56,7 @@ class MealViewController: UITableViewController, MealListFetchDelegate {
         let recipeViewController = storyBoard.instantiateViewController(withIdentifier: "RecipeViewController") as! RecipeViewController
         recipeViewController.meal = meal
         
-        navigationController?.pushViewController(recipeViewController, animated: false)
+        navigationController?.pushViewController(recipeViewController, animated: true)
                 
         tableView.deselectRow(at: indexPath, animated: false)
     }

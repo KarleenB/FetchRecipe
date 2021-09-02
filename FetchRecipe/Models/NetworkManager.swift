@@ -30,8 +30,6 @@ struct NetworkManager {
     
     let baseURL = "https://www.themealdb.com/api/json/v1/1/"
     
-    let recipeURL = "lookup.php?i=52772"
-    
     // MARK: - Category List
     
     func getCategoryURL() -> String {
@@ -119,7 +117,6 @@ struct NetworkManager {
                    if let recipes = self.decodeRecipeInfo(recipeData: safeData),
                       let recipe = recipes.meals.first {
                         self.recipeInfoFetchDelegate?.didFetchRecipeInfo(with: recipe)
-                        print(recipe)
                     }
                 }
             }
