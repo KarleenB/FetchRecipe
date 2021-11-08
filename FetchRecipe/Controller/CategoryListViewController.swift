@@ -41,7 +41,7 @@ class CategoryListViewController: UIViewController, CategoryListFetchDelegate, U
         print(error)
     }
     
-    //MARK: - TableView Delegate
+    //MARK: - TableView DataSource & Delegate
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableViewData.count

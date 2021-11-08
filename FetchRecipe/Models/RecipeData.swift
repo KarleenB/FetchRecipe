@@ -74,12 +74,12 @@ struct Recipe: Decodable {
                 strMeasure16, strMeasure17, strMeasure18, strMeasure19, strMeasure20]
     }
     
-    var ingredientDictionary: [(String?, String?)] {
+    var ingredientAndMeasurment: [(String?, String?)] {
         return Array(zip(ingredients, measurements))
     }
     
     var filteredIngredients: [(String, String)] {
-        return ingredientDictionary.filter { (ingredient, measurement) in
+        return ingredientAndMeasurment.filter { (ingredient, measurement) in
             guard let ingredient = ingredient, let measurement = measurement else {
                 return false
             }
