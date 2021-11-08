@@ -12,7 +12,7 @@
         <!--Categories-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CategoryListViewController" customModule="FetchRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="BYZ-38-t0r" customClass="CategoryListViewController" customModule="FetchRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
         <!--Recipe View Controller-->
         <scene sceneID="cTr-qt-053">
             <objects>
-                <viewController storyboardIdentifier="RecipeViewController" id="NOH-lL-Goe" customClass="RecipeViewController" customModule="FetchRecipe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeViewController" extendedLayoutIncludesOpaqueBars="YES" id="NOH-lL-Goe" customClass="RecipeViewController" customModule="FetchRecipe" customModuleProvider="target" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" id="fyb-bx-Cot">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,7 +86,6 @@
                         <viewLayoutGuide key="contentLayoutGuide" id="Hed-ZY-kYN"/>
                         <viewLayoutGuide key="frameLayoutGuide" id="PlU-4e-Chm"/>
                     </scrollView>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="ingredientsLabel" destination="XDe-rb-TUy" id="hmn-kC-aQn"/>
                         <outlet property="instructionLabel" destination="yKQ-XK-atp" id="3o0-T1-JgU"/>
@@ -100,7 +99,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hro-qQ-DfE">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hfB-Z0-rgQ" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="hfB-Z0-rgQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="29w-Yo-cFS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
